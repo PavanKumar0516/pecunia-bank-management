@@ -1,0 +1,27 @@
+Spring:
+  application:
+    name: pbms-api-gateway
+server:
+  port: 8686
+
+zuul:
+  routes:
+    pbms-account:  
+      path: /pecuniabank/**
+      service-id: pbms-account-management
+      strip-prefix: false
+      
+    pbms-transaction:
+      path: /transaction/**
+      service-id: pbms-transaction-management
+      strip-prefix: false
+      
+    pbms-passbook:
+      path: /passbook/**
+      service-id: pbms-passbook-management
+      strip-prefix: false
+      
+    pbms-loan:
+      path: /loan/**
+      service-id: pbms-loan-management
+      strip-prefix: false
