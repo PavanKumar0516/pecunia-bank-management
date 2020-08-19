@@ -4,6 +4,8 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Random;
 
+import javax.security.auth.login.AccountNotFoundException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -25,42 +27,45 @@ public class TransactionService implements ITransactionService {
 	RestTemplate restTemplate;
 
 	@Override
-	@HystrixCommand(fallbackMethod = "debitUsingSlipFallBack")
+	//@HystrixCommand(fallbackMethod = "debitUsingSlipFallBack")
 	public Transaction debitUsingSlip(long accNumber, double amount, Transaction transaction)
-			throws InvaildAccountException, InsufficienBalanceException {
+			throws InvaildAccountException, InsufficienBalanceException, AccountNotFoundException {
 
 		BankAccountDetails bankDetails = restTemplate.getForObject(
 				"http://PBMS-ACCOUNT-MANAGEMENT/pecuniabank/get/accNum/" + accNumber, BankAccountDetails.class);
-		if (amount < 100 || amount > transaction.getCurrentBalance()) {
+		transaction.setTransAccountNumber(bankDetails.getAccNumber());
+		if (accNumber != bankDetails.getAccNumber()) {
+			throw new AccountNotFoundException("account number doesn't exists");
+		}
+		if (amount > transaction.getCurrentBalance()) {
 			throw new InsufficienBalanceException("Amount should be more than 100 and less than current balance");
 		}
-		transaction.setTransAccountNumber(bankDetails.getAccNumber());
+
 		transaction.setTransactionId(
 				Integer.parseInt((String.valueOf(Math.abs(new Random().nextLong())).substring(0, 6))));
-
 		transaction.setTransClosingBalance(transaction.getCurrentBalance() - amount);
-
 		transaction.setTransactionAmount(transaction.getCurrentBalance() - transaction.getTransClosingBalance());
 		transaction.setTransactionDate(LocalDateTime.now());
 		return transactionRepo.save(transaction);
 	}
 
-	public Transaction debitUsingSlipFallBack(long accNumber, double amount, Transaction transaction) {
+	/*public Transaction debitUsingSlipFallBack(long accNumber, double amount, Transaction transaction) {
 		Transaction transaction1 = new Transaction(transaction.getTransAccountNumber(), 11111, 50000.0, 2000.0,
 				transaction.getTransactionDate(), 52000.0);
 		return transaction1;
 
-	}
+	}*/
 
 	@Override
 	public Transaction creditUsingSlip(long accNumber, double amount, Transaction transaction)
-			throws InvaildAccountException, InsufficienBalanceException {
-		
-		 
+			throws InvaildAccountException, InsufficienBalanceException, AccountNotFoundException {
 
 		BankAccountDetails bankDetails = restTemplate.getForObject(
 				"http://PBMS-ACCOUNT-MANAGEMENT/pecuniabank/get/accNum/" + accNumber, BankAccountDetails.class);
 
+		if (accNumber != bankDetails.getAccNumber()) {
+			throw new AccountNotFoundException("account number doesn't exists");
+		}
 		if (amount > 100000) {
 			throw new InsufficienBalanceException("amount should be less than 1 lakh");
 		}
@@ -70,28 +75,26 @@ public class TransactionService implements ITransactionService {
 		transaction.setTransClosingBalance(transaction.getCurrentBalance() + amount);
 		transaction.setTransactionAmount(transaction.getTransClosingBalance() - transaction.getCurrentBalance());
 		transaction.setTransactionDate(LocalDateTime.now());
-		// transaction.setTransAccountNumber(transaction.getTransAccountNumber());
 		return transactionRepo.save(transaction);
 	}
 
 	@Override
 	public Transaction creditUsingCheque(long accNumber, double amount, Transaction transaction)
-			throws InvaildAccountException {
+			throws InvaildAccountException, AccountNotFoundException {
 
 		BankAccountDetails bankDetails = restTemplate.getForObject(
 				"http://PBMS-ACCOUNT-MANAGEMENT/pecuniabank/get/accNum/" + accNumber, BankAccountDetails.class);
 
-		// transaction.setTransAccountNumber(bankDetails.getAccNumber());
+		if (accNumber != bankDetails.getAccNumber()) {
+			throw new AccountNotFoundException("account number doesn't exists");
+		}
 		transaction.setTransactionId(
 				Integer.parseInt((String.valueOf(Math.abs(new Random().nextLong())).substring(0, 6))));
-
 		transaction.getChequeDetails()
 				.setDebitAccNum(Long.parseLong((String.valueOf(Math.abs(new Random().nextLong())).substring(0, 12))));
 		transaction.getChequeDetails()
 				.setChequeId(Integer.parseInt((String.valueOf(Math.abs(new Random().nextLong())).substring(0, 7))));
-
 		transaction.setTransAccountNumber(bankDetails.getAccNumber());
-
 		transaction.getChequeDetails().setChequeIssueDate(LocalDateTime.now());
 		transaction.getChequeDetails().setChequeAmount(amount);
 		transaction.getChequeDetails().setChequeClosingBalance(
@@ -108,14 +111,12 @@ public class TransactionService implements ITransactionService {
 
 	@Override
 	public Transaction debitUsingCheque(long accNumber, double amount, Transaction transaction)
-			throws InvaildAccountException, ChequeBounceException {
-		/*
-		 * if (!transactionRepo.existsById(accNumber)) { throw new
-		 * InvaildAccountException("accountNumber doesn't exists"); }
-		 */
+			throws InvaildAccountException, ChequeBounceException, AccountNotFoundException {
 		BankAccountDetails bankDetails = restTemplate.getForObject(
 				"http://PBMS-ACCOUNT-MANAGEMENT/pecuniabank/get/accNum/" + accNumber, BankAccountDetails.class);
-
+		if (accNumber != bankDetails.getAccNumber()) {
+			throw new AccountNotFoundException("account number doesn't exists");
+		}
 		transaction.setTransAccountNumber(bankDetails.getAccNumber());
 		transaction.getChequeDetails().setChequeIssueDate(LocalDateTime.now());
 		if (amount > 100000) {
@@ -130,8 +131,6 @@ public class TransactionService implements ITransactionService {
 
 		transaction.getChequeDetails()
 				.setChequeId(Integer.parseInt((String.valueOf(Math.abs(new Random().nextLong())).substring(0, 7))));
-
-		// transaction.getChequeDetails().setFromAccNum(bankDetails.getAccNumber());
 		transaction.getChequeDetails().setChequeAmount(amount);
 		transaction.getChequeDetails().setChequeClosingBalance(
 				transaction.getChequeDetails().getCurrentBalance() - transaction.getChequeDetails().getChequeAmount());

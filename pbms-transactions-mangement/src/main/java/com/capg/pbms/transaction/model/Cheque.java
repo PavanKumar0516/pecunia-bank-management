@@ -14,29 +14,11 @@ public class Cheque {
 	@Column(unique = true)
 	private int chequeId;
 	private double currentBalance;
-	
-private double ChequeAmount;
+	private double ChequeAmount;
 	@DateTimeFormat(pattern = "yyyy/MM/ddThh:mm:ss")
 	private LocalDateTime chequeIssueDate;
 	private double chequeClosingBalance;
-	//private long fromAccNum;
 	private long debitAccNum;
-	
-
-	public long getDebitAccNum() {
-		return debitAccNum;
-	}
-	
-
-	public void setDebitAccNum(long debitAccNum) {
-		this.debitAccNum = debitAccNum;
-	}
-	
-	/*
-	 * public long getFromAccNum() { return fromAccNum; }
-	 * 
-	 * public void setFromAccNum(long fromAccNum) { this.fromAccNum = fromAccNum; }
-	 */
 
 	public Cheque() {
 	}
@@ -44,11 +26,8 @@ private double ChequeAmount;
 	public Cheque(int chequeId, double currentBalance, double chequeAmount, LocalDateTime chequeIssueDate,
 			double chequeClosingBalance) {
 		super();
-
 		this.chequeId = chequeId;
-
 		this.currentBalance = currentBalance;
-
 		ChequeAmount = chequeAmount;
 		this.chequeIssueDate = chequeIssueDate;
 		this.chequeClosingBalance = chequeClosingBalance;
@@ -92,6 +71,14 @@ private double ChequeAmount;
 
 	public void setChequeClosingBalance(double chequeClosingBalance) {
 		this.chequeClosingBalance = chequeClosingBalance;
+	}
+
+	public long getDebitAccNum() {
+		return debitAccNum;
+	}
+
+	public void setDebitAccNum(long debitAccNum) {
+		this.debitAccNum = debitAccNum;
 	}
 
 	@Override

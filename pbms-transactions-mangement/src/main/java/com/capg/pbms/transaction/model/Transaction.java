@@ -13,8 +13,6 @@ import javax.persistence.Table;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
-
-
 @Entity
 
 @Table(name = "transaction_info")
@@ -28,20 +26,21 @@ public class Transaction {
 	@DateTimeFormat(pattern = "yyyy/MM/dd")
 	private LocalDateTime transactionDate;
 	private double transClosingBalance;
-
 	@OneToOne(cascade = { CascadeType.ALL })
 	private Cheque chequeDetails;
 
 	public Transaction() {
-		// TODO Auto-generated constructor stub
+
 	}
 
-	
-	  public long getTransAccountNumber() { return transAccountNumber; }
-	  
-	  public void setTransAccountNumber(long transAccountNumber) {
-	  this.transAccountNumber = transAccountNumber; }
-	 
+	public long getTransAccountNumber() {
+		return transAccountNumber;
+	}
+
+	public void setTransAccountNumber(long transAccountNumber) {
+		this.transAccountNumber = transAccountNumber;
+	}
+
 	public int getTransactionId() {
 		return transactionId;
 	}
@@ -104,9 +103,9 @@ public class Transaction {
 
 	@Override
 	public String toString() {
-		return "Transaction [  transactionId=" + transactionId
-				+ ", currentBalance=" + currentBalance + ", transactionAmount=" + transactionAmount
-				+ ", transactionDate=" + transactionDate + ", transClosingBalance=" + transClosingBalance + "]";
+		return "Transaction [  transactionId=" + transactionId + ", currentBalance=" + currentBalance
+				+ ", transactionAmount=" + transactionAmount + ", transactionDate=" + transactionDate
+				+ ", transClosingBalance=" + transClosingBalance + "]";
 	}
 
 }
