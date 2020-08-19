@@ -7,10 +7,7 @@ import org.springframework.stereotype.Repository;
 import com.capg.pbms.transaction.model.Transaction;
 
 @Repository
-public interface TransactionRepo extends JpaRepository<Transaction, Long> {
-	
-	
-	//@Query("from transaction_info where transactionId:transactionId")
+public interface TransactionRepo extends JpaRepository<Transaction, Integer> {
 	public Transaction findByTransactionId(int transactionId);
 
 }

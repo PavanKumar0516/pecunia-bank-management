@@ -3,16 +3,15 @@ package com.capg.pbms.transaction.model;
 import java.time.LocalDateTime;
 import java.util.Random;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 public class Cheque {
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(unique = true)
 	private int chequeId;
 	private double currentBalance;
 	
@@ -20,16 +19,24 @@ private double ChequeAmount;
 	@DateTimeFormat(pattern = "yyyy/MM/ddThh:mm:ss")
 	private LocalDateTime chequeIssueDate;
 	private double chequeClosingBalance;
+	//private long fromAccNum;
 	private long debitAccNum;
 	
 
 	public long getDebitAccNum() {
 		return debitAccNum;
 	}
+	
 
 	public void setDebitAccNum(long debitAccNum) {
 		this.debitAccNum = debitAccNum;
 	}
+	
+	/*
+	 * public long getFromAccNum() { return fromAccNum; }
+	 * 
+	 * public void setFromAccNum(long fromAccNum) { this.fromAccNum = fromAccNum; }
+	 */
 
 	public Cheque() {
 	}

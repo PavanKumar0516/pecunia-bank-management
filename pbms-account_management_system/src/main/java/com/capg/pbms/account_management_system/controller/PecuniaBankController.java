@@ -25,7 +25,6 @@ import com.capg.pbms.account_management_system.service.PecuniaBankService;
 class PecuniaBankController {
 	@Autowired
 	PecuniaBankService service;
-
 	@PostMapping("/add")
 	@ResponseStatus(code = HttpStatus.CREATED)
 	public BankAccountDetails addAccount(@RequestBody BankAccountDetails details) throws Exception  {

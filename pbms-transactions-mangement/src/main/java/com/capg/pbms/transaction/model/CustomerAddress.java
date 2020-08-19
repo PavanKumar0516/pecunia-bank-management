@@ -4,10 +4,10 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-@Entity
+//@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+//@Entity
 public class CustomerAddress {
-	@Id
+	//@Id
 	private int addId;
 	private String customerAddress1;
 	private String customerAddress2;

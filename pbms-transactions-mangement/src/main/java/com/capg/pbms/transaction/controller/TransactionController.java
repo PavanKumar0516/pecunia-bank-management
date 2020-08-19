@@ -23,7 +23,6 @@ import com.capg.pbms.transaction.service.TransactionService;
 
 @RestController
 @RequestMapping("/transaction")
-@ResponseStatus(code = HttpStatus.ACCEPTED)
 public class TransactionController {
 
 	@Autowired

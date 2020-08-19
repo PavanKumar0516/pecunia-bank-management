@@ -2,26 +2,27 @@ package com.capg.pbms.transaction.model;
 
 import java.time.LocalDateTime;
 
-import java.util.Random;
-
 import javax.persistence.CascadeType;
+
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
+
 import javax.persistence.Id;
+
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+
+
 @Entity
+
 @Table(name = "transaction_info")
 public class Transaction {
 
 	@Id
-	
-	private long transAccountNumber;
 	private int transactionId;
+	private long transAccountNumber;
 	private double currentBalance;
 	private double transactionAmount;
 	@DateTimeFormat(pattern = "yyyy/MM/dd")
@@ -35,14 +36,12 @@ public class Transaction {
 		// TODO Auto-generated constructor stub
 	}
 
-	public long getTransAccountNumber() {
-		return transAccountNumber;
-	}
-
-	public void setTransAccountNumber(long transAccountNumber) {
-		this.transAccountNumber = transAccountNumber;
-	}
-
+	
+	  public long getTransAccountNumber() { return transAccountNumber; }
+	  
+	  public void setTransAccountNumber(long transAccountNumber) {
+	  this.transAccountNumber = transAccountNumber; }
+	 
 	public int getTransactionId() {
 		return transactionId;
 	}
@@ -105,7 +104,7 @@ public class Transaction {
 
 	@Override
 	public String toString() {
-		return "Transaction [transAccountNumber=" + transAccountNumber + ", transactionId=" + transactionId
+		return "Transaction [  transactionId=" + transactionId
 				+ ", currentBalance=" + currentBalance + ", transactionAmount=" + transactionAmount
 				+ ", transactionDate=" + transactionDate + ", transClosingBalance=" + transClosingBalance + "]";
 	}

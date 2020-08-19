@@ -12,11 +12,9 @@ import org.springframework.format.annotation.DateTimeFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.OneToOne;
-@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-@Entity
+//@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+
 public class BankAccountDetails {
-	
-	@Id
 	private long accNumber;
 	private String accountType;
 	private double accountInterest;
