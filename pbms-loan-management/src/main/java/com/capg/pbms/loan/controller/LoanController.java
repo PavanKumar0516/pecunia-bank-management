@@ -1,6 +1,9 @@
 package com.capg.pbms.loan.controller;
 
+import javax.security.auth.login.AccountNotFoundException;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -16,10 +19,6 @@ public class LoanController {
 	
 	@Autowired
 	ILoanService service;
-	//@PostMapping("/addAccount")
-	//public Customer addaccount(@RequestBody Customer account) {
-	//	return service.addaccount(account);
-	//}
 
 	@PostMapping("/assign/loan/id/{id}/{creditscore}/{amount}")
 	
@@ -27,6 +26,9 @@ public class LoanController {
 	{
 		 return service.addLoan(accountId, creditScore, loanAmount, loanrequest);		
 	}
+	@GetMapping("/get/{accountId}")
+public LoanRequest getByLoanId(@PathVariable("accountId") long accountId) throws AccountNotFoundException {
+		return service.getLoanById(accountId);
 	
-	
+}
  }
