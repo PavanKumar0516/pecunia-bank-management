@@ -6,22 +6,21 @@ import javax.security.auth.login.AccountNotFoundException;
 
 import com.capg.pbms.transaction.exception.ChequeBounceException;
 import com.capg.pbms.transaction.exception.InsufficienBalanceException;
-import com.capg.pbms.transaction.exception.InvaildAccountException;
 import com.capg.pbms.transaction.model.Transaction;
 
 public interface ITransactionService {
 
 	Transaction debitUsingSlip(long accNumber, double amount, Transaction transaction)
-			throws InvaildAccountException, InsufficienBalanceException, AccountNotFoundException;
+			throws InsufficienBalanceException, AccountNotFoundException;
 
 	Transaction creditUsingSlip(long accNumber, double amount, Transaction transaction)
-			throws InvaildAccountException, InsufficienBalanceException, AccountNotFoundException;
+			throws InsufficienBalanceException, AccountNotFoundException;
 
 	Transaction creditUsingCheque(long accNumber, double amount, Transaction transaction)
-			throws InvaildAccountException, AccountNotFoundException;
+			throws AccountNotFoundException, ChequeBounceException;
 
 	Transaction debitUsingCheque(long accNumber, double amount, Transaction transaction)
-			throws InvaildAccountException, ChequeBounceException, AccountNotFoundException;
+			throws ChequeBounceException, AccountNotFoundException;
 
 	List<Transaction> getAllTransaction();
 

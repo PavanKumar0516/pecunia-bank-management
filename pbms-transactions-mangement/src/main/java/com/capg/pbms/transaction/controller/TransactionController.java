@@ -5,6 +5,7 @@ import java.util.List;
 import javax.security.auth.login.AccountNotFoundException;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -13,43 +14,44 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.capg.pbms.transaction.exception.ChequeBounceException;
 import com.capg.pbms.transaction.exception.InsufficienBalanceException;
-import com.capg.pbms.transaction.exception.InvaildAccountException;
 import com.capg.pbms.transaction.model.Transaction;
 import com.capg.pbms.transaction.service.TransactionService;
 
 @RestController
+@CrossOrigin(origins = {"http://localhost:4200"})
 @RequestMapping("/transaction")
+
 public class TransactionController {
 
 	@Autowired
 	TransactionService service;
 
-	@PostMapping("/debit/{accNumber}/{amount}")
+	@PostMapping("/debitwithslip/{accNumber}/amount/{amount}")
 	public Transaction debitUsingSlip(@PathVariable("accNumber") long accNumber, @PathVariable("amount") double amount,
 
-			@RequestBody Transaction transaction) throws InvaildAccountException, InsufficienBalanceException, AccountNotFoundException {
+			@RequestBody Transaction transaction) throws InsufficienBalanceException, AccountNotFoundException {
 
 		return service.debitUsingSlip(accNumber, amount, transaction);
 	}
 
-	@PostMapping("/credit/{accNumber}/{amount}")
+	@PostMapping("/creditwithslip/{accNumber}/amount/{amount}")
 	public Transaction creditUsingSlip(@PathVariable("accNumber") long accNumber, @PathVariable("amount") double amount,
 
-			@RequestBody Transaction transaction) throws InvaildAccountException, InsufficienBalanceException, AccountNotFoundException {
+			@RequestBody Transaction transaction) throws InsufficienBalanceException, AccountNotFoundException {
 		return service.creditUsingSlip(accNumber, amount, transaction);
 	}
 
-	@PostMapping("/credits/{accNumber}/{amount}")
+	@PostMapping("/creditwithcheque/{accNumber}/amount/{amount}")
 	public Transaction creditUsingCheque(@PathVariable("accNumber") long accNumber,
 			@PathVariable("amount") double amount, @RequestBody Transaction transaction)
-			throws InvaildAccountException, InsufficienBalanceException, AccountNotFoundException {
+			throws InsufficienBalanceException, AccountNotFoundException, ChequeBounceException {
 		return service.creditUsingCheque(accNumber, amount, transaction);
 	}
 
-	@PostMapping("/debits/{accNumber}/{amount}")
+	@PostMapping("/debitwithcheque/{accNumber}/amount/{amount}")
 	public Transaction debitUsingCheque(@PathVariable("accNumber") long accNumber,
 			@PathVariable("amount") double amount, @RequestBody Transaction transaction)
-			throws InvaildAccountException, InsufficienBalanceException, ChequeBounceException, AccountNotFoundException {
+			throws InsufficienBalanceException, ChequeBounceException, AccountNotFoundException {
 		return service.debitUsingCheque(accNumber, amount, transaction);
 	}
 
@@ -59,9 +61,16 @@ public class TransactionController {
 	}
 
 	@GetMapping("/trans/{transId}")
-	public Transaction findByTransactionId(@PathVariable("transId") int transId) throws InvaildAccountException {
+	public Transaction findByTransactionId(@PathVariable("transId") int transId) throws AccountNotFoundException {
 
 		return service.findByTransactionId(transId);
+
+	}
+
+	@GetMapping("/trans/getAll/{accNumber}")
+	public Transaction fingByTransactionNumber(@PathVariable("accNumber") long accNumber)
+			throws AccountNotFoundException {
+		return service.findByTransactionNumber(accNumber);
 
 	}
 

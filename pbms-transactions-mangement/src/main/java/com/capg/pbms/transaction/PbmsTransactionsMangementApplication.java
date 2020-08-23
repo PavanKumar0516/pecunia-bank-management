@@ -10,7 +10,7 @@ import org.springframework.web.client.RestTemplate;
 
 @SpringBootApplication
 @EnableEurekaClient
-//@EnableHystrix
+@EnableHystrix
 public class PbmsTransactionsMangementApplication {
 
 	public static void main(String[] args) {
@@ -22,8 +22,7 @@ public class PbmsTransactionsMangementApplication {
 
 	public RestTemplate getRestTemplate() {
 		return new RestTemplate();
-		
+
 	}
-	
-	
+
 }

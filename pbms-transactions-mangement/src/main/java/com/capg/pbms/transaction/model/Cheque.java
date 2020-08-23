@@ -15,6 +15,7 @@ public class Cheque {
 	private int chequeId;
 	private double currentBalance;
 	private double ChequeAmount;
+	private String chequeHolderName;
 	@DateTimeFormat(pattern = "yyyy/MM/ddThh:mm:ss")
 	private LocalDateTime chequeIssueDate;
 	private double chequeClosingBalance;
@@ -79,6 +80,15 @@ public class Cheque {
 
 	public void setDebitAccNum(long debitAccNum) {
 		this.debitAccNum = debitAccNum;
+	}
+	
+
+	public String getChequeHolderName() {
+		return chequeHolderName;
+	}
+
+	public void setChequeHolderName(String chequeHolderName) {
+		this.chequeHolderName = chequeHolderName;
 	}
 
 	@Override
