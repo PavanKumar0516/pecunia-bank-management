@@ -2,6 +2,7 @@ package com.capg.pbms.transaction.model;
 
 import java.time.LocalDateTime;
 
+
 import javax.persistence.CascadeType;
 
 import javax.persistence.Entity;
@@ -12,6 +13,14 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import org.springframework.format.annotation.DateTimeFormat;
+
+
+/*******************************************************************************************************************************
+   -Author                   :    P.AkashPawar
+   -Created/Modified Date    :     14-08-2020
+   -Description              :     Transaction Bean Class
+ 
+ *******************************************************************************************************************************/
 
 @Entity
 

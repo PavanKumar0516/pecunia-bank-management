@@ -2,6 +2,7 @@ package com.capg.pbms.transaction.controller;
 
 import java.util.Date;
 
+
 import javax.security.auth.login.AccountNotFoundException;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.http.HttpStatus;
@@ -13,6 +14,11 @@ import com.capg.pbms.transaction.exception.ChequeBounceException;
 import com.capg.pbms.transaction.exception.InsufficienBalanceException;
 import com.capg.pbms.transaction.model.ErrorResponse;
 
+/*******************************************************************************************************************************
+-Author                   :     P.AkashPawar
+-Created/Modified Date    :     23-08-2020
+-Description              :     ErrorController Class for handling Transaction Management System Exceptions
+*******************************************************************************************************************************/
 @RestControllerAdvice
 public class ErrorController {
 	@ResponseStatus(code = HttpStatus.CREATED)

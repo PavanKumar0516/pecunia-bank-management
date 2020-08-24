@@ -2,6 +2,7 @@ package com.capg.pbms.transaction.controller;
 
 import java.util.List;
 
+
 import javax.security.auth.login.AccountNotFoundException;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +17,14 @@ import com.capg.pbms.transaction.exception.ChequeBounceException;
 import com.capg.pbms.transaction.exception.InsufficienBalanceException;
 import com.capg.pbms.transaction.model.Transaction;
 import com.capg.pbms.transaction.service.TransactionService;
+
+
+
+/*******************************************************************************************************************************
+-Author                   :     P.AkashPawar
+-Created/Modified Date    :     22-08-2020
+-Description              :     TransactionController Class for accessing Transaction Management System services
+*******************************************************************************************************************************/
 
 @RestController
 @CrossOrigin(origins = {"http://localhost:4200"})

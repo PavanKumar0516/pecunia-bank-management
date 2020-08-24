@@ -1,12 +1,21 @@
 package com.capg.pbms.transaction.model;
 
 import java.time.LocalDateTime;
+
 import java.util.Random;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import org.springframework.format.annotation.DateTimeFormat;
+
+
+/*******************************************************************************************************************************
+   -Author                   :    P.AkashPawar
+   -Created/Modified Date    :     14-08-2020
+   -Description              :     Cheque Bean Class
+ 
+ *******************************************************************************************************************************/
 
 @Entity
 public class Cheque {
