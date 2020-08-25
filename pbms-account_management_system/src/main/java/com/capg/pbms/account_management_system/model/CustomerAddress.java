@@ -1,6 +1,8 @@
 package com.capg.pbms.account_management_system.model;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -8,6 +10,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @Entity
 public class CustomerAddress {
 	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int addId;
 	private String customerAddress1;
 	private String customerAddress2;

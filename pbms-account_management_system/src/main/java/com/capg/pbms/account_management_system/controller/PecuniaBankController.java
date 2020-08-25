@@ -22,8 +22,8 @@ import com.capg.pbms.account_management_system.service.PecuniaBankService;
 
 
 @RestController
-@RequestMapping("/pecuniabank")
 @CrossOrigin(origins= {"http://localhost:4200"})
+@RequestMapping("/pecuniabank")
 class PecuniaBankController {
 	@Autowired
 	PecuniaBankService service;

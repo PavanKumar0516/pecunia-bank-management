@@ -1,6 +1,7 @@
 package com.capg.pbms.transaction.service;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 import javax.security.auth.login.AccountNotFoundException;
@@ -108,6 +109,7 @@ public class TransactionService implements ITransactionService {
 		transaction.getChequeDetails()
 				.setChequeId(Integer.parseInt((String.valueOf(Math.abs(new Random().nextLong())).substring(0, 7))));
 		transaction.setTransAccountNumber(bankDetails.getAccNumber());
+		
 		transaction.getChequeDetails().setChequeIssueDate(LocalDateTime.now());
 		transaction.getChequeDetails().setChequeAmount(amount);
 		transaction.getChequeDetails().getChequeHolderName();
@@ -134,7 +136,6 @@ public class TransactionService implements ITransactionService {
 		}
 		transaction.setTransAccountNumber(bankDetails.getAccNumber());
 		transaction.getChequeDetails().setCurrentBalance(bankDetails.getAccountBalance());
-
 		transaction.getChequeDetails().setChequeIssueDate(LocalDateTime.now());
 		if (amount > 100000) {
 			throw new ChequeBounceException("Amount should be less than 1 lakh");
@@ -165,11 +166,18 @@ public class TransactionService implements ITransactionService {
 		return transaction;
 
 	}
-
-	public Transaction findByTransactionNumber(long transAccountNumber) throws AccountNotFoundException {
-		Transaction getAllTrans = transactionRepo.findBytransAccountNumber(transAccountNumber);
-		return getAllTrans;
-
+	@Override
+	public List<Transaction> getAllTransactions(long accNumber) {
+		// TODO Auto-generated method stub
+		List<Transaction> transactions=transactionRepo.findAll();
+		List<Transaction> transactionList=new ArrayList<>();
+		for (Transaction transaction : transactions) {
+			if(transaction.getTransAccountNumber()==accNumber)
+			{
+				transactionList.add(transaction);
+			}
+		}
+		return transactionList;
 	}
 
 }

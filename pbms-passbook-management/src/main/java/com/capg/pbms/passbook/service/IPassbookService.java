@@ -8,4 +8,6 @@ public interface IPassbookService {
 List<Transaction> getAllTransactions();
 
 Transaction getTransactionByTransactionId(int transactionId);
+
+List<Transaction> getTrasactionByAccountNumber(long accNumber);
 }

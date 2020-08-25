@@ -76,11 +76,9 @@ public class TransactionController {
 
 	}
 
-	@GetMapping("/trans/getAll/{accNumber}")
-	public Transaction fingByTransactionNumber(@PathVariable("accNumber") long accNumber)
-			throws AccountNotFoundException {
-		return service.findByTransactionNumber(accNumber);
-
+	@GetMapping("/trans/getalltransactions/{accNumber}")
+	public List<Transaction> getAllTransactions(@PathVariable ("accNumber") long accNumber)
+	{
+		return service.getAllTransactions(accNumber);
 	}
-
 }

@@ -100,6 +100,7 @@ public class Cheque {
 		this.chequeHolderName = chequeHolderName;
 	}
 
+
 	@Override
 	public String toString() {
 		return "Cheque [ chequeId=" + chequeId + ", chequeHolderName=" + ", currentBalance=" + currentBalance

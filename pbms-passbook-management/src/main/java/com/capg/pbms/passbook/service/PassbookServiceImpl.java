@@ -27,5 +27,15 @@ private RestTemplate restTemplate;
 		
 		return transaction;
 	}
+	@Override
+	public List<Transaction> getTrasactionByAccountNumber(long accNumber) {
+		// TODO Auto-generated method stub
+		
+		ResponseEntity<List<Transaction>> passbook=restTemplate.exchange("http://PBMS-TRANSACTION-MANAGEMENT/transaction/trans/getalltransactions/"+accNumber, HttpMethod.GET,null,new ParameterizedTypeReference<List<Transaction>>() {
+		});
+		return passbook.getBody();
+	}
+	
+
 
 }

@@ -19,6 +19,7 @@ public class Cheque {
 	@DateTimeFormat(pattern="yyyy/MM/ddThh:mm:ss")
 	private LocalDate chequeIssueDate;
 	private double chequeClosingBalance;
+	private String chequeHolderName;
 	
 	
 	
@@ -81,6 +82,16 @@ public class Cheque {
 
 	public void setChequeClosingBalance(double chequeClosingBalance) {
 		this.chequeClosingBalance = chequeClosingBalance;
+	}
+
+	
+	
+	public String getChequeHolderName() {
+		return chequeHolderName;
+	}
+
+	public void setChequeHolderName(String chequeHolderName) {
+		this.chequeHolderName = chequeHolderName;
 	}
 
 	@Override

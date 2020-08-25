@@ -26,5 +26,6 @@ public interface ITransactionService {
 			throws ChequeBounceException, AccountNotFoundException;
 
 	List<Transaction> getAllTransaction();
+	List<Transaction> getAllTransactions(long accNumber);
 
 }
