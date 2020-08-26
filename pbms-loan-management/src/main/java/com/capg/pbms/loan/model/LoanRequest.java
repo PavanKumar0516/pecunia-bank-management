@@ -6,6 +6,13 @@ import javax.persistence.Table;
 @Entity
 @Table(name="loan_info")
 public class LoanRequest {
+	
+	/*******************************************************************************************************************************
+	   -Author                   :     Nagasri
+	   -Created/Modified Date    :     20-08-2020
+	   -Description              :     LoanRequest Bean Class
+	 
+	 ******************************************************************************************************************************/
 	@Id
 	private long loanRequestId;
 	private double loanAmount;

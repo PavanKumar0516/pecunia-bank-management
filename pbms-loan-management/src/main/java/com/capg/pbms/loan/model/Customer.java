@@ -11,6 +11,13 @@ import org.springframework.format.annotation.DateTimeFormat;
 @Entity
 @Table(name = "Cus_info")
 public class Customer {
+	
+	/*******************************************************************************************************************************
+	-Author                       :     Nagasri
+	-Created/Modified Date        :     20-08-2020
+	-Description                  :     Customer bean class 
+	*******************************************************************************************************************************/
+
 	@Id
 	@Column(name = "accountId")
 	private  long  accountId;

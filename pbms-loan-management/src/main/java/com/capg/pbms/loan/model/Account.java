@@ -7,6 +7,15 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "account_info")
 public class Account {
+	
+
+/*******************************************************************************************************************************
+	   -Author                   :     Nagasri
+	   -Created/Modified Date    :     20-08-2020
+	   -Description              :     AccountDetails Bean Class
+	 
+	 ******************************************************************************************************************************/
+	
 	@Id
 	//@Pattern(regexp="[0-9]{12}")
 	private long accountId;

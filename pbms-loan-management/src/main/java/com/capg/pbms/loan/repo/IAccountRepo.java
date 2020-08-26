@@ -2,16 +2,17 @@ package com.capg.pbms.loan.repo;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import com.capg.pbms.loan.model.LoanRequest;
+import com.capg.pbms.loan.model.Customer;
 
-public interface ILoanRequestRepo extends JpaRepository<LoanRequest, Long> {
-
+public interface IAccountRepo extends JpaRepository<Customer, Long>{
+   
 
 /*******************************************************************************************************************************
 -Author                   :     Nagasri
 -Created/Modified Date    :     20-08-2020
--Description              :     LoanRequest Repository Interface with LoanRequest as Type and Long as PrimaryKey
+-Description              :     Account Repository Interface with Customer as Type and Long as PrimaryKey
 *******************************************************************************************************************************/
+
 
 
 }
