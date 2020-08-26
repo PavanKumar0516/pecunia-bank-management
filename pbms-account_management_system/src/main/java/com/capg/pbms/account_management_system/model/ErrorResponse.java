@@ -2,7 +2,13 @@ package com.capg.pbms.account_management_system.model;
 
 
 import java.util.Date;
-
+/**
+* ErrorResponse Bean class
+*
+* @author   :P.Akshitha, J.PavanKumar
+* @version  :1.0
+* @since    :2020-08-19
+*/
 public class ErrorResponse {
 
 	private Date date;

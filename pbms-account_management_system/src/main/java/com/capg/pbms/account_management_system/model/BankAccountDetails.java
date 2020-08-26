@@ -2,16 +2,20 @@ package com.capg.pbms.account_management_system.model;
 
 import java.time.LocalDate;
 import java.util.Random;
-
 import javax.persistence.CascadeType;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import org.springframework.format.annotation.DateTimeFormat;
-
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
 import javax.persistence.OneToOne;
+/**
+* BankAccountDetails Bean class
+*
+* @author   :P.Akshitha, J.PavanKumar
+* @version  :1.0
+* @since    :2020-08-15
+*/
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 @Entity
 public class BankAccountDetails {
