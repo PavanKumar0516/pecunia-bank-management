@@ -13,7 +13,13 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 import com.capg.pbms.account_management_system.exception.AccountAlreadyExistException;
 import com.capg.pbms.account_management_system.exception.EmptyAccountListException;
 import com.capg.pbms.account_management_system.model.ErrorResponse;
-
+/**
+* ErrorController for showing the Exceptions
+*
+* @author   :P.Akshitha, J.PavanKumar
+* @version  :1.0
+* @since    :2020-08-19
+*/
 @RestControllerAdvice
 public class ErrorController {
 	@ResponseStatus(code = HttpStatus.CREATED)

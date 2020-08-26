@@ -6,6 +6,13 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+/**
+* CustomerAddress Bean class
+*
+* @author   :P.Akshitha, J.PavanKumar
+* @version  :1.0
+* @since    :2020-08-15
+*/
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 @Entity
 public class CustomerAddress {
@@ -18,6 +25,22 @@ public class CustomerAddress {
 	private String state;
 	private String country;
 	private int pincode;
+	
+	public CustomerAddress() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+	public CustomerAddress(int addId, String customerAddress1, String customerAddress2, String city, String state,
+			String country, int pincode) {
+		super();
+		this.addId = addId;
+		this.customerAddress1 = customerAddress1;
+		this.customerAddress2 = customerAddress2;
+		this.city = city;
+		this.state = state;
+		this.country = country;
+		this.pincode = pincode;
+	}
 	@Override
 	public String toString() {
 		return "CustomerAddress [customerAddress1=" + customerAddress1 + ", customerAddress2=" + customerAddress2
