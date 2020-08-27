@@ -1,14 +1,8 @@
 package com.capg.pbms.transaction.model;
 
 import java.time.LocalDate;
-import java.util.Random;
-
 import javax.persistence.CascadeType;
-import javax.persistence.ElementCollection;
-import javax.persistence.Entity;
-import javax.persistence.Id;
 import org.springframework.format.annotation.DateTimeFormat;
-
 import javax.persistence.OneToOne;
 
 public class BankAccountDetails {

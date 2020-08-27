@@ -19,7 +19,6 @@ public class PbmsTransactionsMangementApplication {
 
 	@Bean
 	@LoadBalanced
-
 	public RestTemplate getRestTemplate() {
 		return new RestTemplate();
 

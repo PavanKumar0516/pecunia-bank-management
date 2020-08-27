@@ -2,26 +2,25 @@ package com.capg.pbms.transaction.controller;
 
 import java.util.Date;
 
-
 import javax.security.auth.login.AccountNotFoundException;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
-
 import com.capg.pbms.transaction.exception.ChequeBounceException;
 import com.capg.pbms.transaction.exception.InsufficienBalanceException;
 import com.capg.pbms.transaction.model.ErrorResponse;
 
-/*******************************************************************************************************************************
--Author                   :     P.AkashPawar
--Created/Modified Date    :     23-08-2020
--Description              :     ErrorController Class for handling Transaction Management System Exceptions
-*******************************************************************************************************************************/
+/**
+ * ErrorController Class for handling Transaction Management System Exceptions
+ *
+ * @author :P.AkashPawar
+ * @since :2020-08-20
+ */
 @RestControllerAdvice
 public class ErrorController {
-	@ResponseStatus(code = HttpStatus.CREATED)
+	@ResponseStatus(code = HttpStatus.BAD_REQUEST)
 	@ExceptionHandler(value = { AccountNotFoundException.class })
 	public ErrorResponse handleStudentAlreadyExistsException(Exception ex, HttpServletRequest req) {
 
@@ -30,7 +29,7 @@ public class ErrorController {
 
 	}
 
-	@ResponseStatus(code = HttpStatus.CREATED)
+	@ResponseStatus(code = HttpStatus.BAD_REQUEST)
 	@ExceptionHandler(value = { InsufficienBalanceException.class })
 	public ErrorResponse handleStudentNotException(Exception ex, HttpServletRequest req) {
 

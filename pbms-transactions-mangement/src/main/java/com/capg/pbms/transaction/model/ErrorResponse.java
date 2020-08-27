@@ -1,6 +1,5 @@
 package com.capg.pbms.transaction.model;
 
-
 import java.util.Date;
 
 public class ErrorResponse {
