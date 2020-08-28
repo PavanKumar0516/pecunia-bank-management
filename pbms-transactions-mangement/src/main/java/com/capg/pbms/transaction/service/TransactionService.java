@@ -5,8 +5,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 import javax.security.auth.login.AccountNotFoundException;
-import javax.transaction.Transactional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -17,15 +15,14 @@ import com.capg.pbms.transaction.model.Transaction;
 import com.capg.pbms.transaction.repo.TransactionRepo;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 
-
-/*******************************************************************************************************************************
--Author                   :     P.AkashPawar
--Created/Modified Date    :     17-08-2020
--Description              :     TransactionServiceImpl Class implements services for Transaction Management System
-*******************************************************************************************************************************/
-
+/**
+ * The TransactionService class implements for accessing Transaction Management
+ * System Repository
+ *
+ * @author :P.AkashPawar
+ * @since :2020-08-18
+ */
 @Service
-@Transactional
 public class TransactionService implements ITransactionService {
 
 	@Autowired
@@ -34,7 +31,6 @@ public class TransactionService implements ITransactionService {
 	RestTemplate restTemplate;
 
 	@Override
-	@HystrixCommand(fallbackMethod = "debitUsingSlipFallBack")
 	public Transaction debitUsingSlip(long accNumber, double amount, Transaction transaction)
 			throws InsufficienBalanceException, AccountNotFoundException {
 		BankAccountDetails bankDetails = restTemplate.getForObject(
@@ -56,14 +52,8 @@ public class TransactionService implements ITransactionService {
 		return transactionRepo.save(transaction);
 	}
 
-	public Transaction debitUsingSlipFallBack(long accNumber, double amount, Transaction transaction) {
-		Transaction transaction1 = new Transaction(transaction.getTransAccountNumber(), 1, 50000.0, 2000.0,
-				transaction.getTransactionDate(), 89000.0);
-		return transaction1;
-
-	}
-
 	@Override
+	@HystrixCommand(fallbackMethod = "creditUsingSlipFallBack")
 	public Transaction creditUsingSlip(long accNumber, double amount, Transaction transaction)
 			throws InsufficienBalanceException, AccountNotFoundException {
 
@@ -79,12 +69,19 @@ public class TransactionService implements ITransactionService {
 		transaction.setTransAccountNumber(bankDetails.getAccNumber());
 		transaction.setCurrentBalance(bankDetails.getAccountBalance());
 
-		transaction.setTransactionId(
-				Integer.parseInt((String.valueOf(Math.abs(new Random().nextLong())).substring(0, 7))));
+		transaction
+				.setTransactionId(Integer.parseInt((String.valueOf(Math.abs(new Random().nextInt())).substring(0, 7))));
 		transaction.setTransClosingBalance(transaction.getCurrentBalance() + amount);
 		transaction.setTransactionAmount(transaction.getTransClosingBalance() - transaction.getCurrentBalance());
 		transaction.setTransactionDate(LocalDateTime.now());
 		return transactionRepo.save(transaction);
+	}
+
+	public Transaction creditUsingSlipFallBack(long accNumber, double amount, Transaction transaction) {
+		Transaction transaction1 = new Transaction(transaction.getTransAccountNumber(), 1, 00.0, 00.0,
+				transaction.getTransactionDate(), 00.0);
+		return transaction1;
+
 	}
 
 	@Override
@@ -109,21 +106,13 @@ public class TransactionService implements ITransactionService {
 		transaction.getChequeDetails()
 				.setChequeId(Integer.parseInt((String.valueOf(Math.abs(new Random().nextLong())).substring(0, 7))));
 		transaction.setTransAccountNumber(bankDetails.getAccNumber());
-		
 		transaction.getChequeDetails().setChequeIssueDate(LocalDateTime.now());
 		transaction.getChequeDetails().setChequeAmount(amount);
 		transaction.getChequeDetails().getChequeHolderName();
-		
 		transaction.getChequeDetails().setChequeClosingBalance(
 				transaction.getChequeDetails().getCurrentBalance() + transaction.getChequeDetails().getChequeAmount());
 		return transactionRepo.save(transaction);
 
-	}
-
-	@Override
-	public List<Transaction> getAllTransaction() {
-
-		return transactionRepo.findAll();
 	}
 
 	@Override
@@ -144,10 +133,8 @@ public class TransactionService implements ITransactionService {
 
 		transaction.setTransactionId(
 				Integer.parseInt((String.valueOf(Math.abs(new Random().nextLong())).substring(0, 7))));
-
 		transaction.getChequeDetails()
 				.setDebitAccNum(Long.parseLong((String.valueOf(Math.abs(new Random().nextLong())).substring(0, 12))));
-
 		transaction.getChequeDetails()
 				.setChequeId(Integer.parseInt((String.valueOf(Math.abs(new Random().nextLong())).substring(0, 7))));
 		transaction.getChequeDetails().setChequeAmount(amount);
@@ -158,22 +145,13 @@ public class TransactionService implements ITransactionService {
 
 	}
 
-	public Transaction findByTransactionId(int transactionId) throws AccountNotFoundException {
-		Transaction transaction = transactionRepo.findByTransactionId(transactionId);
-		if (transaction == null) {
-			throw new AccountNotFoundException("transactionId not found");
-		}
-		return transaction;
-
-	}
 	@Override
 	public List<Transaction> getAllTransactions(long accNumber) {
 		// TODO Auto-generated method stub
-		List<Transaction> transactions=transactionRepo.findAll();
-		List<Transaction> transactionList=new ArrayList<>();
+		List<Transaction> transactions = transactionRepo.findAll();
+		List<Transaction> transactionList = new ArrayList<>();
 		for (Transaction transaction : transactions) {
-			if(transaction.getTransAccountNumber()==accNumber)
-			{
+			if (transaction.getTransAccountNumber() == accNumber) {
 				transactionList.add(transaction);
 			}
 		}

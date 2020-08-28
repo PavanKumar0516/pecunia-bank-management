@@ -1,26 +1,22 @@
 package com.capg.pbms.transaction.model;
 
 import java.time.LocalDateTime;
-
-import java.util.Random;
-
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Table;
+
 import org.springframework.format.annotation.DateTimeFormat;
 
-
-/*******************************************************************************************************************************
-   -Author                   :    P.AkashPawar
-   -Created/Modified Date    :     14-08-2020
-   -Description              :     Cheque Bean Class
- 
- *******************************************************************************************************************************/
-
+/**
+ * ChequeBean Class
+ *
+ * @author :P.AkashPawar
+ * @since :2020-08-15
+ */
 @Entity
+@Table(name = "cheque_info")
 public class Cheque {
 	@Id
-	@Column(unique = true)
 	private int chequeId;
 	private double currentBalance;
 	private double ChequeAmount;
@@ -90,7 +86,6 @@ public class Cheque {
 	public void setDebitAccNum(long debitAccNum) {
 		this.debitAccNum = debitAccNum;
 	}
-	
 
 	public String getChequeHolderName() {
 		return chequeHolderName;
@@ -99,7 +94,6 @@ public class Cheque {
 	public void setChequeHolderName(String chequeHolderName) {
 		this.chequeHolderName = chequeHolderName;
 	}
-
 
 	@Override
 	public String toString() {

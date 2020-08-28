@@ -6,11 +6,12 @@ import com.capg.pbms.transaction.exception.ChequeBounceException;
 import com.capg.pbms.transaction.exception.InsufficienBalanceException;
 import com.capg.pbms.transaction.model.Transaction;
 
-/*******************************************************************************************************************************
- * -Author : P.AkashPawar -Created/Modified Date : 18-08-2020 -Description :
- * TransactionService Interface with services for Transaction Management System
- *******************************************************************************************************************************/
-
+/**
+ * The TransactionService Interface for accessing Transaction Management System
+ *
+ * @author :P.AkashPawar
+ * @since :2020-08-18
+ */
 public interface ITransactionService {
 
 	Transaction debitUsingSlip(long accNumber, double amount, Transaction transaction)
@@ -25,7 +26,6 @@ public interface ITransactionService {
 	Transaction debitUsingCheque(long accNumber, double amount, Transaction transaction)
 			throws ChequeBounceException, AccountNotFoundException;
 
-	List<Transaction> getAllTransaction();
 	List<Transaction> getAllTransactions(long accNumber);
 
 }

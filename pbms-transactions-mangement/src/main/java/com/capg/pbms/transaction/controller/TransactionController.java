@@ -2,7 +2,6 @@ package com.capg.pbms.transaction.controller;
 
 import java.util.List;
 
-
 import javax.security.auth.login.AccountNotFoundException;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,20 +17,20 @@ import com.capg.pbms.transaction.exception.InsufficienBalanceException;
 import com.capg.pbms.transaction.model.Transaction;
 import com.capg.pbms.transaction.service.TransactionService;
 
-
-
-/*******************************************************************************************************************************
--Author                   :     P.AkashPawar
--Created/Modified Date    :     22-08-2020
--Description              :     TransactionController Class for accessing Transaction Management System services
-*******************************************************************************************************************************/
-
+/**
+ * The TransactionController class implements for accessing Transaction
+ * Management System services
+ *
+ * @author :P.AkashPawar
+ * @since :2020-08-18
+ */
 @RestController
-@CrossOrigin(origins = {"http://localhost:4200"})
+@CrossOrigin(origins = { "http://localhost:4200" })
 @RequestMapping("/transaction")
 
 public class TransactionController {
-
+	// Tells the application context to inject an instance of TransactionService
+	// here
 	@Autowired
 	TransactionService service;
 
@@ -64,21 +63,8 @@ public class TransactionController {
 		return service.debitUsingCheque(accNumber, amount, transaction);
 	}
 
-	@GetMapping("/getAll")
-	public List<Transaction> getAllTransaction() {
-		return service.getAllTransaction();
-	}
-
-	@GetMapping("/trans/{transId}")
-	public Transaction findByTransactionId(@PathVariable("transId") int transId) throws AccountNotFoundException {
-
-		return service.findByTransactionId(transId);
-
-	}
-
 	@GetMapping("/trans/getalltransactions/{accNumber}")
-	public List<Transaction> getAllTransactions(@PathVariable ("accNumber") long accNumber)
-	{
+	public List<Transaction> getAllTransactions(@PathVariable("accNumber") long accNumber) {
 		return service.getAllTransactions(accNumber);
 	}
 }
