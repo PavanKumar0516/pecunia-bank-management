@@ -3,6 +3,7 @@ package com.capg.pbms.loan.model;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+
 @Entity
 @Table(name="loan_info")
 public class LoanRequest {

@@ -53,14 +53,14 @@ class PbmsAccountManagementSystemApplicationTests {
 
 	}
 
-	@Test
-	public void testUpdateAccount() {
-		BankAccountDetails accountDetailsTest = repo.save(accountDetails);
-		assertEquals(accountDetailsTest.getCustomerName(), accountDetails.getCustomerName());
-		assertEquals(accountDetailsTest.getCustomerPhno(), accountDetails.getCustomerPhno());
-		assertEquals(accountDetailsTest.getCustomerAddress().getAddId(), accountDetails.getCustomerAddress().getAddId());
-
-	}
+//	@Test
+//	public void testUpdateAccount() {
+//		BankAccountDetails accountDetailsTest = repo.save(accountDetails);
+//		assertEquals(accountDetailsTest.getCustomerName(), accountDetails.getCustomerName());
+//		assertEquals(accountDetailsTest.getCustomerPhno(), accountDetails.getCustomerPhno());
+//		assertEquals(accountDetailsTest.getCustomerAddress().getAddId(), accountDetails.getCustomerAddress().getAddId());
+//
+//	}
 	
 	
 

@@ -34,7 +34,7 @@ public class TransactionService implements ITransactionService {
 	RestTemplate restTemplate;
 
 	@Override
-	@HystrixCommand(fallbackMethod = "debitUsingSlipFallBack")
+	//@HystrixCommand(fallbackMethod = "debitUsingSlipFallBack")
 	public Transaction debitUsingSlip(long accNumber, double amount, Transaction transaction)
 			throws InsufficienBalanceException, AccountNotFoundException {
 		BankAccountDetails bankDetails = restTemplate.getForObject(
@@ -56,13 +56,14 @@ public class TransactionService implements ITransactionService {
 		return transactionRepo.save(transaction);
 	}
 
-	public Transaction debitUsingSlipFallBack(long accNumber, double amount, Transaction transaction) {
-		Transaction transaction1 = new Transaction(transaction.getTransAccountNumber(), 1, 50000.0, 2000.0,
-				transaction.getTransactionDate(), 89000.0);
-		return transaction1;
-
-	}
-
+	/*
+	 * public Transaction debitUsingSlipFallBack(long accNumber, double amount,
+	 * Transaction transaction) { Transaction transaction1 = new
+	 * Transaction(transaction.getTransAccountNumber(), 1, 50000.0, 2000.0,
+	 * transaction.getTransactionDate(), 89000.0); return transaction1;
+	 * 
+	 * }
+	 */
 	@Override
 	public Transaction creditUsingSlip(long accNumber, double amount, Transaction transaction)
 			throws InsufficienBalanceException, AccountNotFoundException {

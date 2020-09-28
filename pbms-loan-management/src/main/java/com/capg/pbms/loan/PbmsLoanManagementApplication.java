@@ -11,14 +11,17 @@ import org.springframework.web.client.RestTemplate;
 @SpringBootApplication
 @EnableEurekaClient
 @EnableHystrix
-public class PbmsLoanManagementApplication {
+public class PbmsLoanManagementApplication
+{
 
-	public static void main(String[] args) {
+	public static void main(String[] args) 
+	{
 		SpringApplication.run(PbmsLoanManagementApplication.class, args);
 	}
 	@Bean
 	@LoadBalanced
-	RestTemplate getRestTemplate() {
+	RestTemplate getRestTemplate()
+	{
 		return new RestTemplate();
 	}
 }

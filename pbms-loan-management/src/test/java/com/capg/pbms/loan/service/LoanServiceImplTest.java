@@ -20,7 +20,7 @@ class LoanServiceImplTest {
 	@Test
 	void testAddLoan1() {
 		LoanRequest loanrequest=new LoanRequest(510744551037L, 2, "house loan", 3, 300.00, "Accepted", 500.00, 680);
-		assertEquals("Rejected (due to less creditScore)",service.addLoan(369487823202L, 650, 10000, loanrequest).getLoanStatus());
+		assertEquals("Rejected",service.addLoan(369487823202L, 650, 10000, loanrequest).getLoanStatus());
 	}
 	
 	@Test
